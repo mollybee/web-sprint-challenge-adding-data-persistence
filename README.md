@@ -26,8 +26,8 @@ In this project you will be given a set of requirements and must design a databa
 
 ### Files to Complete
 
-1. `index.js`
-2. `api/server.js`
+1. [x]`index.js`
+2. [x]`api/server.js`
 3. `model.js` inside `api/project`, `api/resource` and `api/task`
 4. `router.js` inside `api/project`, `api/resource` and `api/task`
 5. migration file(s)
@@ -97,7 +97,7 @@ Build an API inside the `api` folder with endpoints for:
   - Each task must include `project_name` and `project_description`
   - Example of response body: `[{"task_id":1,"task_description":"baz","task_notes":null,"task_completed":false,"project_name:"bar","project_description":null}]`
 
-**Notes:**
+**Notes:**[x]
 
 - Run tests locally by executing `npm run test`. Tests will be very broken until you flesh out the project sufficiently.
 - You are welcome to create additional files for middlewares etc, but **do not move or rename existing files** or folders.
@@ -106,7 +106,7 @@ Build an API inside the `api` folder with endpoints for:
 - Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work.
 - It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 
-## Submission format
+## Submission format[x]
 
 - [ ] Submit via Codegrade by committing and pushing any new changes.
 - [ ] Create a pull request to merge `<firstName-lastName>` branch into `main`.
@@ -115,7 +115,7 @@ Build an API inside the `api` folder with endpoints for:
 - [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] Any changes pushed after the deadline will not receive any feedback.
 
-## Interview Questions
+## Interview Questions [x]
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
