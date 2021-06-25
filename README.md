@@ -10,11 +10,11 @@ You are not allowed to collaborate during the sprint challenge.
 
 ## Project Set Up
 
-- [ ] Fork and clone the repo. Delete your old fork from Github first if you are repeating this Unit.
-- [ ] Open the assignment in Canvas and click on the "Set up git" option.
-- [ ] Follow instructions to set up Codegrade's Webhook and Deploy Key.
-- [ ] Make a commit and push it to Github.
-- [ ] Check to see that Codegrade has accepted your git submission.
+- [x ] Fork and clone the repo. Delete your old fork from Github first if you are repeating this Unit.
+- [x ] Open the assignment in Canvas and click on the "Set up git" option.
+- [x ] Follow instructions to set up Codegrade's Webhook and Deploy Key.
+- [x ] Make a commit and push it to Github.
+- [x ] Check to see that Codegrade has accepted your git submission.
 
 For a step-by-step on setting up Codegrade see [this guide.](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374)
 
@@ -33,13 +33,15 @@ In this project you will be given a set of requirements and must design a databa
 5. migration file(s)
 6. seed file(s) **optional**
 
-### Required Dependencies
+### Required Dependencies[x]
 
 The project needs some additional NPM dependencies in order to work.
 
-### Required Scripts
+### Required Scripts[x]
 
 Add `"start"`. `"server"`, `"migrate"` and `"rollback"` scripts to the `package.json` file.
+ ## this makes my terminal commands: npm start, npm server, npm migrate, npm rollback
+
 
 ### Required Tables
 
@@ -118,6 +120,11 @@ Build an API inside the `api` folder with endpoints for:
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain the difference between Relational Databases and SQL.
+    ## SQL databases are synonmous with 'relational databases', as they require a table-based structure, where the tables can communication their information to one another. NoSQL databases are key-value pair database's where the data structure does not allow for any sort of cross communication.
 2. Why do tables need a Primary Key?
+  ## This is because primary keys are unique identifiers for columns, so no two values can be the same, allowing for row-level accessibility.
 3. What is the name given to a table column that references the Primary Key on another table?
+  ## Foreign Key
 4. What do we need in order to have a _many to many_ relationship between two tables?
+  ## A many-to-many relationship is when multiple records in a table are referencing multiple records in another table. For example, 'animals' could eat various 'foods', and 'foods' could be eaten by a variety of 'animals'.
+    
