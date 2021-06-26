@@ -1,37 +1,70 @@
 // Update with your config settings.
-const sharedConfig = {
-  client: 'sqlite3',
-  useNullAsDefault: true,
-  migrations: {
-    directory: './data/migrations',
-  },
-  // seeds: {
-  //   directory: './data/seeds',   //////THIS IS OPTIONAL
-  // },
-  // this enables foreign keys in SQLite
-  pool: {
-    afterCreate: (conn, done) => {
-      conn.run('PRAGMA foreign_keys = ON', done)
-    },
-  },
-}
+// const sharedConfig = {
+//   client: 'sqlite3',
+//   useNullAsDefault: true,
+//   migrations: {
+//     directory: './data/migrations',
+//   },
+//   // seeds: {
+//   //   directory: './data/seeds',   //////THIS IS OPTIONAL
+//   // },
+//   // this enables foreign keys in SQLite
+//   pool: {
+//     afterCreate: (conn, done) => {
+//       conn.run('PRAGMA foreign_keys = ON', done)
+//     },
+//   },
+// }
 
 
 
 
 module.exports = {
 
-  // development: {
-  //   client: 'sqlite3',
-  //   connection: {
-  //     filename: './dev.sqlite3'
-  //   }
-  // },
+  testing: {
+    client: 'sqlite3',
+    connection: {
+      filename: './dev.sqlite3'
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./data/migrations"
+    },
+    // seeds: {
+    //   directory: "./data/seeds"
+    // }
+    pool: {
+      afterCreate: (conn, done) => {
+          conn.run("PRAGMA foreign_keys = ON", done)
+      }
+  }
+},
 
   development: {
-    ...sharedConfig,
-    connection: { filename: './dev.sqlite3' },
+      client: 'sqlite3',
+      connection: {
+        filename: './dev.sqlite3'
+      },
+      useNullAsDefault: true,
+      migrations: {
+        directory: "./data/migrations"
+      },
+      // seeds: {
+      //   directory: "./data/seeds"
+      // }
+      pool: {
+        afterCreate: (conn, done) => {
+            conn.run("PRAGMA foreign_keys = ON", done)
+        }
+    }
   },
+
+
+
+  // development: {
+  //   ...sharedConfig,
+  //   connection: { filename: './dev.sqlite3' },
+  // },
 
 
   staging: {

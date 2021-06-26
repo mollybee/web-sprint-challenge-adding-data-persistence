@@ -8,8 +8,6 @@
     "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback"
-
-    
   },
   "repository": {
     "type": "git",
