@@ -31,18 +31,20 @@ exports.up = function(knex) {
     })
     .createTable("tasks", tbl=>{
         tbl.increments("task_id")
-        tbl.string("task_description").notNullable()
+        tbl.string("task_description")
+            .notNullable();
         tbl.string("task_notes")
-        tbl.integer("task_completed")
+        // Requirement: Defaults to `0` (false)
+        // Requirement: Boolean
+        tbl.boolean("task_completed")
             .notNullable()
-            .unsigned()
-            //.boolean()?
+            .defaultTo(0);
         tbl.integer("project_id")
             .unsigned()
             .notNullable()
             .references("project_id")
             .inTable("projects")
-            .onDelete("RESTRICT")
+            .onDelete("RESTRICT");
     })
     .createTable("project_resources", tbl=>{
         tbl.increments("project_resources_id")
