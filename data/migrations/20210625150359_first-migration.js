@@ -9,20 +9,25 @@
 
 exports.up = function(knex) {
     return knex.schema   //.schema is part of the default syntax
-    .createTable("projects", tbl=>{
-        tbl.increments("project_id")//Primary Key uses increments
-        tbl.string("project_name").notNullable().unique() 
-        tbl.string("project_description")
-        tbl.integer("project_completed")
+    .createTable("projects", tbl=> {
+        // Primary Key uses increments
+        tbl.increments("project_id");
+        tbl.string("project_name")
             .notNullable()
-            .unsigned()
-            //.boolean()?
+            .unique(); 
+        tbl.string("project_description");
+        // Requirement: Defaults to `0` (false)
+        // Requirement: Boolean
+        tbl.boolean("project_completed")
+            .notNullable()
+            .defaultTo(0);
     })
-    .createTable("resources", tbl=>{
-        tbl.increments("resource_id")
-        tbl.string("resource_name").notNullable().unique()
-        tbl.string("resource_description")
-       
+    .createTable("resources", tbl=> {
+        tbl.increments("resource_id");
+        tbl.string("resource_name")
+            .notNullable()
+            .unique();
+        tbl.string("resource_description");
     })
     .createTable("tasks", tbl=>{
         tbl.increments("task_id")

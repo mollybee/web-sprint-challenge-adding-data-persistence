@@ -26,8 +26,9 @@ const Projects = require('./model.js')
 
 const projectsRouter = express.Router();
 
-//`[GET] /api/projects`
+//  `[GET] /api/projects`
 projectsRouter.get('/', (req, res) => {
+    console.warn('~~ PROJECTS ROUTER: ')
     Projects.find()      //or get()
         .then((projectsArray) => {
             if(!projectsArray){

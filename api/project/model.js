@@ -12,14 +12,22 @@
 const db = require('./../../data/dbConfig.js');
 
 //MODEL FOR GET(/)
- const find = async () => {
-     
-     const allProjects = await db
-       .from('projects')
-       .select('project_id', 'project_name', 'project_description', 'project_completed');
+ const find = async () => { 
+    const allProjects = await db
+        .from('projects')
+        .select('project_id', 'project_name', 'project_description', 'project_completed');
+
+    // project_completed comes back as 0/1, but we need to cast it to false/true
+    // we do that by mapping here and then returning the mapped array.
+    const mappedProjects = allProjects.map(prj => {
+        return {
+            ...prj,
+            project_completed: prj.project_completed === 1
+        }
+    })
   
-     return allProjects;
-   }
+    return mappedProjects;
+}
 
 
 //MODEL FOR POST(/)
