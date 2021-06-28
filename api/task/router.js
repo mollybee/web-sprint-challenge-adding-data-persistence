@@ -15,7 +15,7 @@ const Tasks = require('./model.js')
 
 const tasksRouter = express.Router();
 
-//`[GET] /api/tasks`
+// [GET] /api/tasks
 tasksRouter.get('/', (req, res) => {
     Tasks.find()      //or get()
         .then((tasksArray) => {
@@ -32,23 +32,23 @@ tasksRouter.get('/', (req, res) => {
 })
 
 
-//[POST] /api/tasks`
+// [POST] /api/tasks
 tasksRouter.post('/', (req, res) => {
-    const body = req.body;
-    if(!body || !body.task_id || !body.task_description || !body.task_notes || !body.task_completed || !body.project_id ) {
-        res.status(400).json({message: 'All fields are required'})
-        } else if (typeof body.task_completed !== "boolean") {
-            res.status(400).json({message: "task_completed must be true or false."})
-            } else {
-                Tasks.insert(req.body)
-                    .then(task => {
-                        res.status(200).json(task);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        res.status(500).json({message: 'Error, Could not create new task'})
-                    })
-            }
+    const { task_description, project_id } = req.body;
+    const isMissingRequiredFields = !task_description || project_id === undefined;
+
+    if(isMissingRequiredFields) {
+        res.status(400).json({ message: 'task_description and project_id are required fields' })
+    } else {
+        Tasks.insert(req.body)
+            .then(task => {
+                res.status(200).json(task);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({error, message: 'Error, Could not create new task'})
+            })
+    }
 });
 
 

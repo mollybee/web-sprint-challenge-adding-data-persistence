@@ -1,12 +1,3 @@
-
-// exports.up = function(knex) {
-  
-// };
-
-// exports.down = function(knex) {
-  
-// };
-
 exports.up = function(knex) {
     return knex.schema   //.schema is part of the default syntax
     .createTable("projects", tbl => {
@@ -30,10 +21,10 @@ exports.up = function(knex) {
         tbl.string("resource_description");
     })
     .createTable("tasks", tbl=>{
-        tbl.increments("task_id")
+        tbl.increments("task_id");
         tbl.string("task_description")
             .notNullable();
-        tbl.string("task_notes")
+        tbl.string("task_notes");
         // Requirement: Defaults to `0` (false)
         // Requirement: Boolean
         tbl.boolean("task_completed")

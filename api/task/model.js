@@ -47,17 +47,18 @@ const db = require('./../../data/dbConfig.js');
 }
 
 
-//MODEL FOR POST(/)
-const insert = ({ task_id, task_description, task_notes, task_completed, project_id }) => {
-    
-    const insertResult = db('tasks')
-      .insert({ task_id, task_description, task_notes, task_completed, project_id});
+// MODEL FOR POST(/)
+const insert = async (task) => {
+    const insertResult = await db('tasks').insert(task);
+    const mappedResult = {
+        task_id: insertResult,
+        task_description: task.task_description,
+        task_notes: task.task_notes || null,
+        task_completed: task.task_completed === 1,
+    }
   
-    return insertResult;
-  }
-
-
-
+    return mappedResult;
+}
 
  module.exports = {
     find,
