@@ -21,15 +21,30 @@
 
 const db = require('./../../data/dbConfig.js');
 
-//MODEL FOR GET(/)
+// MODEL FOR GET(/)
  const find = async () => {
-     
      const allTasks = await db
        .from('tasks')
-       .select('task_id', 'task_description', 'task_notes', 'task_completed', 'project_name', 'project_description');
+       .select(
+           'tasks.task_id', 
+           'tasks.task_description', 
+           'tasks.task_notes', 
+           'tasks.task_completed', 
+           'projects.project_name', 
+           'projects.project_description')
+       .leftJoin('projects', 'tasks.project_id', 'projects.project_id');
+
+    // task_completed comes back as 0/1, but we need to cast it to false/true
+    // we do that by mapping here and then returning the mapped array.
+    const mappedTasks = allTasks.map(tsk => {
+        return {
+            ...tsk,
+            task_completed: tsk.task_completed === 1
+        }
+    })
   
-     return allTasks;
-   }
+     return mappedTasks;
+}
 
 
 //MODEL FOR POST(/)
