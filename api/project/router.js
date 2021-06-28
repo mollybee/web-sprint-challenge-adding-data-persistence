@@ -57,7 +57,11 @@ projectsRouter.post('/', (req, res) => {
     } else {
         Projects.insert(req.body)
             .then(project => {
-                res.status(200).json(project);
+                res.status(200).json({ 
+                    project_name,
+                    project_description: req.body.project_description,
+                    project_completed: req.body.project_completed === 1
+                });
             })
             .catch(error => {
                 console.log(error);
