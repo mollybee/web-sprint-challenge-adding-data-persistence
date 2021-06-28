@@ -32,16 +32,14 @@ const db = require('./../../data/dbConfig.js');
 /**
  * 
  * @param {object} project
- * @param {number} project.project_id
  * @param {string} project.project_name
  * @param {string} project.project_description
  * @param {number} project.project_completed - 0 | 1
  * @returns 
  */
-const insert = async ({ project_id, project_name, project_description, project_completed }) => {
-    console.warn('~~~~~ ATTEMPTING INSERT')
-    const insertResult = await db('projects')
-        .insert({ project_id, project_name, project_description, project_completed });
+const insert = async (project) => {
+    const { project_name, project_description, project_completed } = project;
+    const insertResult = await db('projects').insert(project);
   
     return insertResult;
 }

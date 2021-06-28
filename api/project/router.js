@@ -23,13 +23,12 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const express = require('express');
 const Projects = require('./model.js')
-
 const projectsRouter = express.Router();
 
-//  `[GET] /api/projects`
+// [GET] /api/projects
 projectsRouter.get('/', (req, res) => {
-    console.warn('~~ PROJECTS ROUTER: ')
-    Projects.find()      //or get()
+    // Could use `.get()`
+    Projects.find()
         .then((projectsArray) => {
             if(!projectsArray){
                 res.status(404).json([])
@@ -45,23 +44,26 @@ projectsRouter.get('/', (req, res) => {
 
 
 
-//[POST] /api/projects`
+// [POST] /api/projects
 projectsRouter.post('/', (req, res) => {
-    const body = req.body;
-    if(!body || !body.project_id || !body.project_name || !body.project_description || !body.project_completed) {
-        res.status(400).json({message: 'All fields are required'})
-        } else if (typeof body.project_completed !== "boolean") {
-            res.status(400).json({message: "Project_completed must be true or false."})
-            } else {
-                Projects.insert(req.body)
-                    .then(project => {
-                        res.status(200).json(project);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        res.status(500).json({message: 'Error, Could not create new project'})
-                    })
-            }
+    console.warn('~~ PROJECTS ROUTER: ')
+
+    // We have t o check `project_completed` differently because `0` is falsey, but is a valid value
+    const { project_name } = req.body;
+    const isMissingRequiredFields = !project_name 
+
+    if(isMissingRequiredFields) {
+        res.status(400).json({message: 'project_name is required'});
+    } else {
+        Projects.insert(req.body)
+            .then(project => {
+                res.status(200).json(project);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({error, message: 'Error, Could not create new project'})
+            });
+    }
 });
 
 

@@ -9,7 +9,7 @@
 
 exports.up = function(knex) {
     return knex.schema   //.schema is part of the default syntax
-    .createTable("projects", tbl=> {
+    .createTable("projects", tbl => {
         // Primary Key uses increments
         tbl.increments("project_id");
         tbl.string("project_name")
