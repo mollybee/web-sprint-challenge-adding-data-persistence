@@ -41,12 +41,10 @@ tasksRouter.post('/', (req, res) => {
         res.status(400).json({ message: 'task_description and project_id are required fields' })
     } else {
         Tasks.insert(req.body)
-            .then(task => {
-                res.status(200).json(task);
-            })
+            .then(task => res.status(200).json(task))
             .catch(error => {
                 console.log(error);
-                res.status(500).json({error, message: 'Error, Could not create new task'})
+                res.status(500).json({ error, message: 'Error, Could not create new task' })
             })
     }
 });

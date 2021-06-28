@@ -53,13 +53,7 @@ projectsRouter.post('/', (req, res) => {
         res.status(400).json({message: 'project_name is required'});
     } else {
         Projects.insert(req.body)
-            .then(() => {
-                res.status(200).json({ 
-                    project_name,
-                    project_description: req.body.project_description,
-                    project_completed: req.body.project_completed === 1
-                });
-            })
+            .then(project => res.status(200).json(project))
             .catch(error => {
                 console.log(error);
                 res.status(500).json({error, message: 'Error, Could not create new project'})

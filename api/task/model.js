@@ -46,7 +46,6 @@ const db = require('./../../data/dbConfig.js');
      return mappedTasks;
 }
 
-
 // MODEL FOR POST(/)
 const insert = async (task) => {
     const insertResult = await db('tasks').insert(task);

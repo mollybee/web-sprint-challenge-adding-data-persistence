@@ -38,10 +38,15 @@ const db = require('./../../data/dbConfig.js');
  * @returns 
  */
 const insert = async (project) => {
-    const { project_name, project_description, project_completed } = project;
     const insertResult = await db('projects').insert(project);
+    const mappedResult = {
+        project_id: insertResult,
+        project_name: project.project_name,
+        project_description: project.project_description || null,
+        project_completed: project.project_completed === 1,
+    }
   
-    return insertResult;
+    return mappedResult;
 }
 
  module.exports = {
