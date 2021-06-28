@@ -46,9 +46,6 @@ projectsRouter.get('/', (req, res) => {
 
 // [POST] /api/projects
 projectsRouter.post('/', (req, res) => {
-    console.warn('~~ PROJECTS ROUTER: ')
-
-    // We have t o check `project_completed` differently because `0` is falsey, but is a valid value
     const { project_name } = req.body;
     const isMissingRequiredFields = !project_name 
 
@@ -56,7 +53,7 @@ projectsRouter.post('/', (req, res) => {
         res.status(400).json({message: 'project_name is required'});
     } else {
         Projects.insert(req.body)
-            .then(project => {
+            .then(() => {
                 res.status(200).json({ 
                     project_name,
                     project_description: req.body.project_description,

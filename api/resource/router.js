@@ -21,10 +21,9 @@
 
 const express = require('express');
 const Resources = require('./model.js')
-
 const resourcesRouter = express.Router();
 
-//`[GET] /api/resources`
+// [GET] /api/resources
 resourcesRouter.get('/', (req, res) => {
     Resources.find()      
         .then((resourcesArray) => {
@@ -42,21 +41,23 @@ resourcesRouter.get('/', (req, res) => {
 
 
 
-//`[POST] /api/resources`
+// [POST] /api/resources
 resourcesRouter.post('/', (req, res) => {
-    const body = req.body;
-    if(!body || !body.resource_id || !body.resource_name || !body.resource_description ) {
-        res.status(400).json({message: 'All fields are required'})
-        } else {
-                Resources.insert(req.body)
-                    .then(resource => {
-                        res.status(200).json(resource);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        res.status(500).json({message: 'Error, Could not create new resource'})
-                    })
-            }
+    const { resource_name } = req.body;
+    const isMissingRequiredFields = !resource_name;
+
+    if(isMissingRequiredFields) {
+        res.status(400).json({message: 'resource_name is a required field.'});
+    } else {
+        Resources.insert(req.body)
+            .then(resource => {
+                res.status(200).json(resource);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({message: 'Error, Could not create new resource'})
+            });
+    }
 });
 
 
