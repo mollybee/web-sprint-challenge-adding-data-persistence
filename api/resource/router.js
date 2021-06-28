@@ -50,8 +50,11 @@ resourcesRouter.post('/', (req, res) => {
         res.status(400).json({message: 'resource_name is a required field.'});
     } else {
         Resources.insert(req.body)
-            .then(resource => {
-                res.status(200).json(resource);
+            .then(() => {
+                res.status(200).json({
+                    resource_name,
+                    resource_description: req.body.resource_description,
+                });
             })
             .catch(error => {
                 console.log(error);
